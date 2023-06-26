@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ApiProvider extends ChangeNotifier {
-  final List data = [];
+  final List dataList = [];
 
-  void queryData(context, {required List data}) {
-    print(data);
+  void queryData({required List data}) {
+    dataList.clear();
+    dataList.addAll(data);
   }
 }

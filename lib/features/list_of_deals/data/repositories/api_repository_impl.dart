@@ -10,7 +10,7 @@ class ApiRepositoryImpl implements ApiRepository {
     try {
       return await remoteDataSource.queryApi();
     } catch (error) {
-      print('1-$error');
+      print('$error');
       return [];
     }
   }

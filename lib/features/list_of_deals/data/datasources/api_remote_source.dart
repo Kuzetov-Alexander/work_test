@@ -21,13 +21,12 @@ class ApiRemoteSourceImpl implements ApiRemoteSource {
     request.body = json.encode({
       "SID": "10813_0c0a9a2f86eab09196705a274378b64a",
       "FILTER": {"BOARD_ID": 1843},
-      "REQUIRED_FIELDS": ["CAR_NUMBER_FLAT"],
+      "REQUIRED_FIELDS": ["CAR_NUMBER_FLAT", "OFFER_SUM"],
       "VISUAL_FIELDS": [
         "CONTACT_TITLE",
         "OFFER_ID",
         "OFFERS_TYPE_NAME",
-        "STATUS_NAME",
-        "OFFER_SUM"
+        "STATUS_NAME"
       ],
       "PAGE": 1,
       "LIMIT": 12
@@ -42,12 +41,10 @@ class ApiRemoteSourceImpl implements ApiRemoteSource {
       final res = data['RESPONSE'];
       final result = res['DATA'];
 
-      // Process the resultList further if needed
-      print(result);
       return result;
     } else {
       print(response.reasonPhrase);
-      return []; // or return null, depending on your needs
+      return [];
     }
   }
 }
