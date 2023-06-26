@@ -6,3 +6,5 @@ abstract class ApiBlocEvent extends Equatable {
 }
 
 class GetApiEvent extends ApiBlocEvent {}
+
+class DownloadingQueryEvent extends ApiBlocEvent {}

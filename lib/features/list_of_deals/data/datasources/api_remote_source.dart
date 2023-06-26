@@ -14,7 +14,6 @@ class ApiRemoteSourceImpl implements ApiRemoteSource {
     var headers = {
       'Content-Type': 'application/json',
       'Cookie': 'crm_uuid=10813_0c0a9a2f86eab09196705a274378b64a'
-      // вообще не нужно
     };
     var request = http.Request(
       'POST',
@@ -24,12 +23,12 @@ class ApiRemoteSourceImpl implements ApiRemoteSource {
     request.body = json.encode({
       "SID": "10813_0c0a9a2f86eab09196705a274378b64a",
       "FILTER": {"BOARD_ID": 1843},
-      "REQUIRED_FIELDS": ["CAR_NUMBER_FLAT", (params.offerSum)],
+      "REQUIRED_FIELDS": ["CAR_NUMBER_FLAT", params.offerSum],
       "VISUAL_FIELDS": [
-        (params.contactFullName),
-        (params.offerId),
-        (params.typeOfferName),
-        (params.statusName)
+        params.contactFullName,
+        params.offerId,
+        params.typeOfferName,
+        params.statusName
       ],
       "PAGE": 1,
       "LIMIT": 12

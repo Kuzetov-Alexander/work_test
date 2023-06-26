@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:work_test/features/list_of_deals/data/datasources/api_remote_source.dart';
 import 'package:work_test/features/list_of_deals/data/repositories/api_repository_impl.dart';
 import 'package:work_test/features/list_of_deals/domain/repositories/api_repository.dart';
+import 'package:work_test/features/list_of_deals/domain/usecases/api_case.dart';
 import 'package:work_test/features/list_of_deals/presentation/bloc/api_bloc.dart';
 import 'package:work_test/features/list_of_deals/presentation/pages/my_home_page.dart';
 import 'package:provider/provider.dart';
@@ -35,12 +36,14 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ],
-      child: MultiBlocProvider(
+      child: MultiProvider(
         providers: [
           BlocProvider<ApiBloc>(
             lazy: false,
             create: (context) => ApiBloc(
-              useCase: RepositoryProvider.of<ApiRepository>(context),
+              useCase: ApiCase(
+                repository: RepositoryProvider.of<ApiRepository>(context),
+              ),
             ),
           ),
         ],

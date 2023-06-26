@@ -1,18 +1,19 @@
 import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:work_test/features/list_of_deals/domain/entities/query_api.dart';
-import 'package:work_test/features/list_of_deals/domain/repositories/api_repository.dart';
+import 'package:work_test/features/list_of_deals/domain/usecases/api_case.dart';
 import 'package:work_test/features/list_of_deals/presentation/bloc/api_bloc_state.dart';
 import 'api_bloc_event.dart';
 
 class ApiBloc extends Bloc<ApiBlocEvent, ApiBlocState> {
-  final ApiRepository useCase;
+  final ApiCase useCase;
 
   ApiBloc({required this.useCase}) : super(InitialState()) {
-    on<ApiBlocEvent>((event, emit) async {
+    on<GetApiEvent>((event, emit) async {
+      emit(DownloadingQueryState());
       try {
         await useCase
-            .queryApi(params: QueryApiEntity())
+            .query(params: QueryApiEntity())
             // params: const QueryApiEntity(
             //     contactFullName: 'CONTACT_TITLE',
             //     offerId: 'OFFER_ID',

@@ -8,28 +8,11 @@ class InitialWidget extends StatelessWidget {
     double widthScreen = MediaQuery.of(context).size.width;
     return Padding(
       padding: EdgeInsets.all(widthScreen * 0.03),
-      child: Column(
-        children: [
-          Container(
-            width: widthScreen,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.black),
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(widthScreen * 0.05),
-            ),
-            child: Padding(
-              padding: EdgeInsets.all(widthScreen * 0.03),
-              child: const Column(
-                children: [
-                  Text(
-                    'Все решает кнопочка)',
-                    style: TextStyle(fontSize: 32),
-                  )
-                ],
-              ),
-            ),
-          )
-        ],
+      child: const Center(
+        child: Text(
+          'Все решает кнопочка)',
+          style: TextStyle(fontSize: 32, color: Colors.white),
+        ),
       ),
     );
   }

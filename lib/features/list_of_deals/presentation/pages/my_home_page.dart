@@ -25,28 +25,40 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ApiProvider>(context);
-    print('рестарт');
     return Scaffold(
       backgroundColor: const Color.fromARGB(115, 174, 171, 171),
       appBar: AppBar(
         backgroundColor: Colors.red,
         title: const Text('Продажи STOCRM.ru'),
       ),
-      body: BlocBuilder<ApiBloc, ApiBlocState>(
-        builder: (context, state) {
+      body: BlocConsumer<ApiBloc, ApiBlocState>(
+        listener: (context, state) {
           if (state is GetApiQueryState) {
             provider.queryData(data: state.queryData);
+          }
+        },
+        builder: (context, state) {
+          if (state is DownloadingQueryState) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (state is GetApiQueryState) {
             return const CardWidget();
           }
           return const InitialWidget();
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _queryApi(context);
+      floatingActionButton: BlocBuilder<ApiBloc, ApiBlocState>(
+        builder: (context, state) {
+          return FloatingActionButton(
+            onPressed: state is DownloadingQueryState
+                ? null
+                : () {
+                    _queryApi(context);
+                  },
+            backgroundColor: Colors.red,
+            child: const Icon(Icons.cloud_upload),
+          );
         },
-        backgroundColor: Colors.red,
-        child: const Icon(Icons.cloud_upload),
       ),
     );
   }
