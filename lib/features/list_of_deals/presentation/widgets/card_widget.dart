@@ -12,7 +12,10 @@ class CardWidget extends StatelessWidget {
     double heightScreen = MediaQuery.of(context).size.height;
     return Padding(
       padding: EdgeInsets.all(widthScreen * 0.03),
-      child: ListView.builder(
+      child: ListView.separated(
+        separatorBuilder: (context, index) {
+          return SizedBox(height: heightScreen * 0.01);
+        },
         itemCount: provider.dataList.length,
         itemBuilder: (context, index) {
           final _data = provider.dataList[index];
