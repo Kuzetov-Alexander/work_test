@@ -1,17 +1,20 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:http/http.dart' as http;
+import 'package:work_test/features/list_of_deals/domain/entities/query_api.dart';
 
 abstract interface class ApiRemoteSource {
-  Future<List<dynamic>> queryApi();
+  Future<List<dynamic>> queryApi({required QueryApiEntity params});
 }
 
 class ApiRemoteSourceImpl implements ApiRemoteSource {
   @override
-  Future<List<dynamic>> queryApi() async {
+  Future<List<dynamic>> queryApi({required QueryApiEntity params}) async {
     var headers = {
       'Content-Type': 'application/json',
       'Cookie': 'crm_uuid=10813_0c0a9a2f86eab09196705a274378b64a'
+      // вообще не нужно
     };
     var request = http.Request(
       'POST',
@@ -21,12 +24,12 @@ class ApiRemoteSourceImpl implements ApiRemoteSource {
     request.body = json.encode({
       "SID": "10813_0c0a9a2f86eab09196705a274378b64a",
       "FILTER": {"BOARD_ID": 1843},
-      "REQUIRED_FIELDS": ["CAR_NUMBER_FLAT", "OFFER_SUM"],
+      "REQUIRED_FIELDS": ["CAR_NUMBER_FLAT", (params.offerSum)],
       "VISUAL_FIELDS": [
-        "CONTACT_TITLE",
-        "OFFER_ID",
-        "OFFERS_TYPE_NAME",
-        "STATUS_NAME"
+        (params.contactFullName),
+        (params.offerId),
+        (params.typeOfferName),
+        (params.statusName)
       ],
       "PAGE": 1,
       "LIMIT": 12
@@ -40,10 +43,9 @@ class ApiRemoteSourceImpl implements ApiRemoteSource {
       Map<String, dynamic> data = json.decode(responseBody);
       final res = data['RESPONSE'];
       final result = res['DATA'];
-
       return result;
     } else {
-      print(response.reasonPhrase);
+      log('${response.reasonPhrase}');
       return [];
     }
   }

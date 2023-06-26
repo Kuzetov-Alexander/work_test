@@ -15,7 +15,7 @@ class CardWidget extends StatelessWidget {
       child: ListView.builder(
         itemCount: provider.dataList.length,
         itemBuilder: (context, index) {
-          final data = provider.dataList[index];
+          final _data = provider.dataList[index];
           return Container(
             width: widthScreen,
             height: heightScreen * 0.17,
@@ -34,7 +34,7 @@ class CardWidget extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Text('${data['OFFER_ID']}'),
+                          Text('${_data['OFFER_ID']}'),
                           SizedBox(width: widthScreen * 0.01),
                           Container(
                             width: widthScreen * 0.01,
@@ -45,7 +45,7 @@ class CardWidget extends StatelessWidget {
                                     BorderRadius.circular(widthScreen * 0.05)),
                           ),
                           SizedBox(width: widthScreen * 0.01),
-                          Text('${data['OFFERS_TYPE_NAME']}'),
+                          Text('${_data['OFFERS_TYPE_NAME']}'),
                           SizedBox(width: widthScreen * 0.01),
                           Container(
                             width: widthScreen * 0.01,
@@ -56,7 +56,7 @@ class CardWidget extends StatelessWidget {
                                     BorderRadius.circular(widthScreen * 0.05)),
                           ),
                           SizedBox(width: widthScreen * 0.01),
-                          Text('${data['STATUS_NAME']}'),
+                          Text('${_data['STATUS_NAME']}'),
                         ],
                       ),
                       SizedBox(width: widthScreen * 0.01),
@@ -67,7 +67,7 @@ class CardWidget extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: heightScreen * 0.01),
-                  Text('${data['CONTACT_TITLE']}'),
+                  Text('${_data['CONTACT_TITLE']}'),
                   SizedBox(height: heightScreen * 0.01),
                   const Divider(
                     thickness: 2,
@@ -78,7 +78,7 @@ class CardWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('${data['OFFER_SUM']}'),
+                      Text('${_data['OFFER_SUM']}'),
                       const Text('Поменять статус'),
                     ],
                   ),
