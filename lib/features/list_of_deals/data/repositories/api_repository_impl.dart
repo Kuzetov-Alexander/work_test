@@ -1,13 +1,17 @@
 import 'package:work_test/features/list_of_deals/data/datasources/api_remote_source.dart';
-import 'package:work_test/features/list_of_deals/domain/entities/query_api.dart';
 import 'package:work_test/features/list_of_deals/domain/repositories/api_repository.dart';
 
 class ApiRepositoryImpl implements ApiRepository {
-  final ApiRemoteSource remoteDataSource;
+  final ApiRemoteSourceImpl remoteDataSource;
   ApiRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<List> queryApi({required QueryApi parametr}) {
-    throw UnimplementedError();
+  Future<List<dynamic>> queryApi() async {
+    try {
+      return await remoteDataSource.queryApi();
+    } catch (error) {
+      print('1-$error');
+      return [];
+    }
   }
 }
